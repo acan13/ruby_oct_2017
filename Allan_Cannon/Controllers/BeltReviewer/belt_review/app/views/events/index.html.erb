@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h4>Here are some events in your state</h4>
+    <% unless @events %>
+      <tr><td>There are currently no events. You can add one below</td></tr>
+    <% else %>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Location</th>
+          <th>Host</th>
+          <th>Action</th>
+        </tr>
+        <% @events.each do |event| %>
+          <tr>
+            <td><a href="/events/<%= event.id %>"><%= event.name %></a></td>
+            <td><%= event.date %></td>
+            <td><%= event.location.name %></td>
+            <td><%= event.user.first_name %></td>
+            <td>
+              <% if event.user == current_user %>
+                <a href="/events/<%= event.id %>">Edit</a> |
+                <a href="/events/<%= event.id %>/destroy">Delete</a>
+              <% elsif event.attendees.include?(@user) %>
+                Joined | <a href="/events/<%= event.id %>/attendees/destroy">Cancel</a>
+              <% else %>
+                <a href="/events/<%= event.id %>/attendees/create">Join</a>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+
+    <h4>Here are some events in other states</h4>
+    <% unless @other_events %>
+      <tr><td>Hmm looks like there are currently no events. You can add one below</td></tr>
+    <% else %>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Location</th>
+          <th>State</th>
+          <th>Action</th>
+        </tr>
+        <% @other_events.each do |event| %>
+          <tr>
+            <td><a href="/events/<%= event.id %>"><%= event.name %></a></td>
+            <td><%= event.date %></td>
+            <td><%= event.location.name %></td>
+            <td><%= event.state.name %></td>
+            <td>
+              <% if event.user == current_user %>
+                <a href="/events/<%= event.id %>">Edit</a> |
+                <a href="/events/<%= event.id %>/destroy">Delete</a>
+              <% elsif event.attendees.include?(@user) %>
+                Joined | <a href="/events/<%= event.id %>/attendees/destroy">Cancel</a>
+              <% else %>
+                <a href="/events/<%= event.id %>/attendees/create">Join</a>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+
+
+    <h3>Add a new event</h3>
+    <form class="" action="/events/create" method="post">
+      <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+      <p>
+        <label for="events[name]">Name: </label>
+        <input type="text" name="events[name]" value="">
+      </p>
+      <p>
+        <label for="location_name">Location: </label>
+        <input type="text" name="location_name" value="">
+        <select class="" name="state_id">
+          <% @states.each do |state| %>
+            <option <%= "selected" if state.id == @user.state.id %> value="<%= state.id %>"><%= state.name %></option>
+          <% end %>
+        </select>
+      </p>
+      <p>
+        <input type="submit" name="" value="Add Event">
+      </p>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Dojo Secrets Log In</h1>
+    <form class="" action="/sessions/create" method="post">
+      <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+      <p>
+        <label for="user[email]">Email: </label>
+        <input type="text" name="user[email]" value="">
+      </p>
+      <p>
+        <label for="user[password]">Password: </label>
+        <input type="password" name="user[password]" value="">
+      </p>
+      <p>
+        <input type="submit" name="log_in" value="Log In">
+      </p>
+    </form>
+  </body>
+</html>

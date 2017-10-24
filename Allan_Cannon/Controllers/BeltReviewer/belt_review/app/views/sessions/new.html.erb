@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Welcome to the Belt Reviewer!</h1>
+    <div id="register">
+      <h3>Register</h3>
+      <form class="" action="/users/create" method="post">
+        <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+        <p>
+          <label for="user[first_name]">First Name: </label>
+          <input type="text" name="user[first_name]" value="">
+        </p>
+        <p>
+          <label for="user[last_name]">Last Name: </label>
+          <input type="text" name="user[last_name]" value="">
+        </p>
+        <p>
+          <label for="user[email]">Email: </label>
+          <input type="text" name="user[email]" value="">
+        </p>
+        <p>
+          <label for="location_name">Location: </label>
+          <input type="text" name="location_name" value="">
+          <select class="" name="state_id">
+            <% @states.each do |state| %>
+              <option value="<%= state.id %> "><%= state.name %></option>
+            <% end %>
+          </select>
+        </p>
+        <p>
+          <label for="user[password]">Password: </label>
+          <input type="password" name="user[password]" value="">
+          <p>Password must be at least 8 characters</p>
+        </p>
+        <p>
+          <label for="user[password_confirmation]">Confirm Password: </label>
+          <input type="password" name="user[password_confirmation]" value="">
+        </p>
+        <p>
+          <input type="submit" name="" value="Register">
+        </p>
+      </form>
+    </div>
+    <div id="login">
+      <h3>Log In</h3>
+      <form class="" action="/sessions/create" method="post">
+        <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+        <p>
+          <label for="email">Email: </label>
+          <input type="text" name="email" value="">
+        </p>
+        <p>
+          <label for="password">Password: </label>
+          <input type="password" name="password" value="">
+        </p>
+        <p>
+          <input type="submit" name="" value="Log In">
+        </p>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form class="" action="/users/<%= current_user.id %>" method="post">
+      <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+      <input type="hidden" name="_method" value="patch">
+      <p>
+        <label for="user[first_name]">First Name: </label>
+        <input type="text" name="user[first_name]" value="<%= current_user.first_name %>">
+      </p>
+      <p>
+        <label for="user[last_name]">Last Name: </label>
+        <input type="text" name="user[last_name]" value="<%= current_user.last_name %>">
+      </p>
+      <p>
+        <label for="user[email]">Email: </label>
+        <input type="text" name="user[email]" value="<%= current_user.email %>">
+      </p>
+      <p>
+        <input type="submit" name="edit" value="Update">
+      </p>
+    </form>
+    <form class="" action="/users/<%= current_user.id %>" method="post">
+      <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+      <input type="hidden" name="_method" value="delete">
+      <p>
+        <input type="submit" name="submit" value="Delete Account">
+      </p>
+    </form>
+  </body>
+</html>

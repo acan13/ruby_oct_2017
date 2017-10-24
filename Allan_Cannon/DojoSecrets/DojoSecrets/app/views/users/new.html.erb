@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Dojo Secrets Registration</h1>
+    <form class="" action="/users/create" method="post">
+      <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+      <p>
+        <label for="user[first_name]">First Name: </label>
+        <input type="text" name="user[first_name]" value="">
+      </p>
+      <p>
+        <label for="user[last_name]">Last Name: </label>
+        <input type="text" name="user[last_name]" value="">
+      </p>
+      <p>
+        <label for="user[email]">Email: </label>
+        <input type="text" name="user[email]" value="">
+      </p>
+      <p>
+        <label for="user[password]">Password: </label>
+        <input type="password" name="user[password]" value="">
+      </p>
+      <p>
+        <label for="user[password_confirmation]">Confirm Password: </label>
+        <input type="password" name="user[password_confirmation]" value="">
+      </p>
+      <p>
+        <input type="submit" name="join" value="Join">
+      </p>
+    </form>
+  </body>
+</html>

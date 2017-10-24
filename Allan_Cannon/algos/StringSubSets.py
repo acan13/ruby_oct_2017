@@ -11,5 +11,5 @@ def SSS(string,temp=[]):
 
 
 
-print SSS("ALLAN")
+print SSS("ABC")
 print counter
