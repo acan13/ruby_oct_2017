@@ -1,0 +1,2 @@
+module IgnoredsHelper
+end

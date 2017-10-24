@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h3>Here is your profile description:</h3>
+    <div id="description">
+      <p><%= @user.description %></p>
+    </div>
+
+    <div id="network">
+      <h3>Here is your Professional Network:</h3>
+      <% unless @network.any? %>
+        <p>Looks like you haven't made any connections yet.</p>
+        <p>You can find people to connect with <a href="/users">here</a>.</p>
+      <% else %>
+        <% @network.each do |person| %>
+          <p><a href="/users/<%= person.id %>"><%= person.first_name %> <%= person.last_name %></a></p>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div id="invitations">
+      <h3>Invitations:</h3>
+      <% unless @invitations.any? %>
+        <p>Looks like you you have no pending invitations.</p>
+        <p>You can find people to connect with <a href="/users">here</a>.</p>
+      <% else %>
+        <p>The following people have asked you to be in their network:</p>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Actions</th>
+          </tr>
+          <% @invitations.each do |person| %>
+            <tr>
+              <td><a href="/users/<%= person.id %>"><%= person.first_name %> <%= person.last_name %></a></td>
+              <td><a href="/invitations/<%= person.id %>">Accept Invite</a> | <a href="/ignoreds/<%= person.id %>">Ignore</a></td>
+            </tr>
+          <% end %>
+        </table>
+      <% end %>
+    </div>
+  </body>
+</html>

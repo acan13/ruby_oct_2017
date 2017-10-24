@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LoginTemplate</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <% if current_user %>
+    <div id="logged_in">
+      <p>Welcome <a href="/professional_profile"><%= current_user.first_name %> <%= current_user.last_name %></a></p>
+      <p>
+        <a href="/users">Home</a> |
+        <a href="/users/<%= current_user.id %>/edit">Edit Profile</a> |
+        <a data-method="delete" href="/sessions/destroy">Log Out</a>
+      </p>
+      <% if User.where(id:current_user.invited_by).where.not(id:current_user.invited).where.not(id:current_user.ignored_users).length > 0  and not current_page? ("/professional_profile")%>
+        <p>You currently have <%= User.where(id:current_user.invited_by).where.not(id:current_user.invited).where.not(id:current_user.ignored_users).length %> <a href="/professional_profile">waiting invitations.</a></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= yield %>
+
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |e| %>
+      <p><%= e %></p>
+    <% end %>
+  <% end %>
+
+</body>
+</html>
